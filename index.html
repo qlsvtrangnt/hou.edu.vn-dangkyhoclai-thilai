@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Đăng Ký Học Tập - Đào Tạo Từ Xa</title>
+    <style>
+        /* HIỂN THỊ MẶC ĐỊNH CHUẨN (NORMAL DISPLAY)
+           Đảm bảo ứng dụng hiển thị trọn vẹn 100% khung hình trình duyệt.
+        */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+
+        #app-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        iframe {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Responsive cho thiết bị di động */
+        @media (max-width: 768px) {
+            iframe {
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-wrapper">
+        <!-- LINK WEB APP CỦA BẠN (Dạng /exec) -->
+        <iframe id="main-app" 
+                src="https://script.google.com/macros/s/AKfycbwGTD8wlxvvzw7t8tYPxPUOGmdgr_4L8WC24R_KcptZEoAVFkmeiU_lYMrp_vApFoyX/exec" 
+                allow="clipboard-read; clipboard-write"
+                title="Cổng đăng ký học tập">
+        </iframe>
+    </div>
+
+</body>
+</html>
