@@ -1,1 +1,254 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cổng Đăng Ký Học Tập | Student Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a73e8; /* Xanh Google chuyên nghiệp */
+            --primary-light: #eff6ff;
+            --bg-site: #f1f3f4;
+            --white: #ffffff;
+            --text-main: #202124;
+            --text-sub: #5f6368;
+            --border: #dadce0;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-site);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            background: var(--white);
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4%;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
+
+        /* --- LAYOUT: MỞ RỘNG TỐI ĐA (WIDER) --- */
+        .dashboard-wrapper {
+            max-width: 1300px; /* Độ rộng tổng thể lớn hơn */
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 280px 1fr; /* Sidebar hẹp để nhường chỗ cho Form */
+            gap: 25px;
+            padding: 0 15px;
+            flex: 1;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar { display: flex; flex-direction: column; gap: 15px; }
+        .side-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+        .side-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 0.8rem;
+            color: #5f6368;
+            text-transform: uppercase;
+        }
+        .step { display: flex; gap: 10px; margin-bottom: 15px; }
+        .step-num { width: 24px; height: 24px; background: #e8f0fe; color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+        .step-info b { display: block; font-size: 0.85rem; }
+        .step-info span { font-size: 0.75rem; color: #5f6368; }
+
+        /* --- KHU VỰC FORM (CARD): FIX LỖI CHE KHUẤT --- */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .portal-header-bar {
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-weight: 900;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .registration-card {
+            background: var(--white);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            
+            /* GIẢI PHÁP MỚI: Dùng cửa sổ tĩnh, cho phép cuộn bên trong card */
+            position: relative;
+            height: 70vh; /* Độ cao card chiếm 70% vùng nhìn thấy */
+            overflow: hidden; 
+        }
+
+        .form-scroller {
+            height: 100%;
+            overflow-y: auto; /* Cho phép cuộn bên trong nếu form dài */
+            -webkit-overflow-scrolling: touch; /* Cuộn mượt trên Mobile */
+            padding-bottom: 50px; /* Tạo khoảng trống ở đáy cho nút Submit */
+        }
+
+        iframe {
+            width: 100% !important; /* Độ rộng 100% của card rộng hơn */
+            height: 2000px; /* Đặt chiều cao thật lớn để chứa toàn bộ form */
+            border: none;
+            
+            /* BÍ QUYẾT FIX LỖI: Trả margin-top về 0 */
+            /* Đảm bảo Form bắt đầu từ tiêu đề quan trọng nhất */
+            margin-top: 0px !important; 
+            
+            display: block;
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 900px) {
+            .dashboard-wrapper { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+            .registration-card { height: 85vh; }
+        }
+
+        footer { text-align: center; padding: 20px; font-size: 0.75rem; color: #70757a; background: var(--white); border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="brand">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+        <span>STUDENT PORTAL</span>
+    </div>
+    <div style="color: #1e8e3e; font-size: 0.8rem; font-weight: 600;">● HỆ THỐNG TRỰC TUYẾN</div>
+</nav>
+
+<div class="dashboard-wrapper">
+    <aside class="sidebar">
+        <div class="side-card">
+            <h3>QUY TRÌNH</h3>
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-info"><b>Xác thực</b><span>Tài khoản sinh viên & Ngày sinh</span></div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-info"><b>Kế hoạch</b><span>Chọn Ngành & Môn học</span></div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-info"><b>Ghi nhận</b><span>Nhấn Gửi để hoàn tất</span></div>
+            </div>
+        </div>
+
+        <div class="side-card" style="border-left: 4px solid #ef4444;">
+            <h3>LƯU Ý</h3>
+            <p style="font-size: 0.8rem; color: #5f6368; margin: 0; line-height: 1.6;">
+                Vui lòng không cuộn trang web chính. Hãy cuộn bên trong card Form ở bên phải để thực hiện đăng ký. Mọi thắc mắc vui lòng liên hệ Quản lý sinh viên.
+            </p>
+        </div>
+    </aside>
+
+    <main class="content-area">
+        <div class="portal-header-bar">
+            CỔNG ĐĂNG KÝ HỌC LẠI & THI LẠI
+        </div>
+        
+        <div class="registration-card">
+            <div class="form-scroller">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSezvlV8sCMpJGCsOvVcya8osUK01KeSs98n3AarWsvfqA2TNg/viewform?embedded=true">Đang tải...</iframe>
+            </div>
+        </div>
+    </main>
+</div>
+
+</footer>
+    <p style="text-align: center; color: var(--text-sub); font-size: 0.75rem; margin-bottom: 20px;">
+        &copy; 2026 qlsv_trangnt. Developed for Student Management System.
+    </p>
+</footer>
+
+</body>
+</html>
+<!--<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Đăng Ký Học Tập - Đào Tạo Từ Xa</title>
+    <style>
+        /* HIỂN THỊ MẶC ĐỊNH CHUẨN (NORMAL DISPLAY)
+           Đảm bảo ứng dụng hiển thị trọn vẹn 100% khung hình trình duyệt.
+        */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+
+        #app-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        iframe {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Responsive cho thiết bị di động */
+        @media (max-width: 768px) {
+            iframe {
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-wrapper">
+        
+        <iframe id="main-app" 
+                src="https://script.google.com/macros/s/AKfycbyr_bfNSHf7nktLMAA0m5utHMpilRfiAhxsUm2zGkpggi4idRxyRjKOz_fgOP6ioj3g/exec" 
+                allow="clipboard-read; clipboard-write"
+                title="Cổng đăng ký học tập">
+        </iframe>
+    </div>
+
+</body>
+</html> -->
